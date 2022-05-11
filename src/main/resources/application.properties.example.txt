@@ -1,0 +1,15 @@
+
+spring.datasource.url= url
+spring.datasource.username= bruger
+spring.datasource.password= password
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.generate-ddl=false
+
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=none
+
+spring.jpa.open-in-view=true
+debug=false

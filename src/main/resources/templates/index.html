@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://thymeleaf.org">-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+<H1>Parameter liste</H1>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Element Name</th>
+            <th scope="col">Element Number</th>
+            <th scope="col">Polygon Calculate</th>
+            <th scope="col">Time Resolution</th>
+            <th scope="col">Base Calculate</th>
+            <th scope="col">Parameter Type</th>
+            <th scope="col">Map Type</th>
+            <th scope="col">Unit id</th>
+            <th scope="col">Map Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element : ${plist}">
+            <td th:each="${element.id}">id</td>
+            <td th:text="${element.name}">Element Name</td>
+            <td th:text="${element.element_number}">Element Number</td>
+            <td th:text="${element.polygon_calculate_method_id}">Polygon Calculate</td>
+            <td th:text="${element.time_resolution_id}">Time Resolution</td>
+            <td th:text="${element.base_calculate_method_id}">Base Calculate</td>
+            <td th:text="${element.parameter_type_id}">Parameter Type</td>
+            <td th:text="${element.map_type}">Map Type</td>
+            <td th:text="${element.unit_id}">Unit id</td>
+            <td th:text="${element.map_name}">Map Name</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
