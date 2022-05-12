@@ -9,7 +9,27 @@
 </head>
 <body>
 <H1>Parameter liste</H1>
+<div class="container">
+    <table class = "table">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+            <th scope="col">format</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="time : ${showTime}">
+            <td th:text="${time.id}">id</td>
+            <td th:text="${time.name}">Name</td>
+            <td th:text="${time.description}">Description</td>
+            <td th:text="${time.format}">Format</td>
 
+        </tr>
+        </tbody>
+    </table>
+</div>
 <div class="container">
     <table class="table">
         <thead>
