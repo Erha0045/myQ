@@ -62,6 +62,40 @@
         </tr>
         </tbody>
     </table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">parameter_id</th>
+            <th scope="col">from date</th>
+            <th scope="col">to date</th>
+            <th scope="col">Valuetype</th>
+            <th scope="col">Tries</th>
+            <th scope="col">Status</th>
+            <th scope="col">Username</th>
+            <th scope="col">User location</th>
+            <th scope="col">Depends on/th>
+            <th scope="col">Progress/th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element : ${qList}">
+            <td th:text="${element.id}">id</td>
+            <td th:text="${element.parameter_id}">parameter_id</td>
+            <td th:text="${element.from_date}">from date</td>
+            <td th:text="${element.to_date}">To date</td>
+            <td th:text="${element.valuetype}">Valuetype</td>
+            <td th:text="${element.num_tries}">Tries</td>
+            <td th:text="${element.status}">status</td>
+            <td th:text="${element.username}">Username</td>
+            <td th:text="${element.userlocation}">User location</td>
+            <td th:text="${element.depends_on}">Depends on</td>
+            <td th:text="${element.progress}">Progress</td>
+
+        </tr>
+        </tbody>
+    </table>
+
 
 </div>
 </body>
