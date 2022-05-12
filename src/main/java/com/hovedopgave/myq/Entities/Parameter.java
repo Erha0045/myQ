@@ -1,4 +1,4 @@
-package Entities;
+package com.hovedopgave.myq.Entities;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,19 +10,19 @@ public class Parameter {
     private long id;
     private String name;
     private int element_number;
-    private long polygon_calculate_method_id;
+    private Long polygon_calculate_method_id;
     private long time_resolution_id;
-    private long base_calculate_method_id;
+    private Long base_calculate_method_id;
     private long parameter_type_id;
     private String map_type;
-    private long unit_id;
+    private Long unit_id;
     private String map_name;
 
     public Parameter() {
     }
 
-    public Parameter(String name, int element_number, long polygon_calculate_method_id, long time_resolution_id,
-                     long base_calculate_method_id, long parameter_type_id, String map_type, long unit_id,
+    public Parameter(String name, int element_number, Long polygon_calculate_method_id, long time_resolution_id,
+                     Long base_calculate_method_id, long parameter_type_id, String map_type, Long unit_id,
                      String map_name) {
         this.name = name;
         this.element_number = element_number;
@@ -47,7 +47,7 @@ public class Parameter {
         return element_number;
     }
 
-    public long getPolygon_calculate_method_id() {
+    public Long getPolygon_calculate_method_id() {
         return polygon_calculate_method_id;
     }
 
@@ -55,7 +55,7 @@ public class Parameter {
         return time_resolution_id;
     }
 
-    public long getBase_calculate_method_id() {
+    public Long getBase_calculate_method_id() {
         return base_calculate_method_id;
     }
 
@@ -67,25 +67,12 @@ public class Parameter {
         return map_type;
     }
 
-    public long getUnit_id() {
+    public Long getUnit_id() {
         return unit_id;
     }
 
     public String getMap_name() {
         return map_name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Parameter)) return false;
-        Parameter parameter = (Parameter) o;
-        return getId() == parameter.getId() && getElement_number() == parameter.getElement_number() && getPolygon_calculate_method_id() == parameter.getPolygon_calculate_method_id() && getTime_resolution_id() == parameter.getTime_resolution_id() && getBase_calculate_method_id() == parameter.getBase_calculate_method_id() && getParameter_type_id() == parameter.getParameter_type_id() && getUnit_id() == parameter.getUnit_id() && getName().equals(parameter.getName()) && Objects.equals(getMap_type(), parameter.getMap_type()) && Objects.equals(getMap_name(), parameter.getMap_name());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getElement_number(), getPolygon_calculate_method_id(), getTime_resolution_id(), getBase_calculate_method_id(), getParameter_type_id(), getMap_type(), getUnit_id(), getMap_name());
     }
 
     @Override

@@ -1,6 +1,6 @@
-package Repositories;
+package com.hovedopgave.myq.Repositories;
 
-import Entities.Parameter;
+import com.hovedopgave.myq.Entities.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

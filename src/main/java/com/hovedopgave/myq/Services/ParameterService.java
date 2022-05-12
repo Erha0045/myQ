@@ -1,7 +1,8 @@
-package Services;
+package com.hovedopgave.myq.Services;
 
-import Entities.Parameter;
-import Repositories.ParameterRepository;
+
+import com.hovedopgave.myq.Entities.Parameter;
+import com.hovedopgave.myq.Repositories.ParameterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
