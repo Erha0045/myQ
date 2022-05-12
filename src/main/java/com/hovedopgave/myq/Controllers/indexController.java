@@ -26,16 +26,14 @@ public class indexController {
 
 
     @GetMapping("/")
-    public String elementList(Model model){
+    public String showHomePage(Model model){
         List<Parameter> parameterList = parameterService.listAll();
         model.addAttribute("plist", parameterList);
 
+            List<TimeResolution> timeList = timeResolutionService.findAll();
+            model.addAttribute("showTime", timeList);
+
         return "index";
-    }
-    @GetMapping("/time")
-    public String showTime (Model model){
-        List<TimeResolution> timeList = timeResolutionService.findAll();
-        model.addAttribute("showTime", timeList);
-        return "index";
+
     }
 }
