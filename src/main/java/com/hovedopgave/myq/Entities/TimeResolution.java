@@ -13,6 +13,15 @@ public class TimeResolution {
     private String description;
     private String format;
 
+    public TimeResolution( String name, long id) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public TimeResolution() {
+
+    }
+
 
     public long getId() {
         return id;
