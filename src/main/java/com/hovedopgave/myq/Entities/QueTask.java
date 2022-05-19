@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 public class QueTask {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private long parameter_id;

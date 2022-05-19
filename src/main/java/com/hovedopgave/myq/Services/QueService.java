@@ -18,9 +18,13 @@ public class QueService {
     @Autowired
     QueRepository queRepository;
 
-    public List<QueTask> listAll(){
-        return queRepository.findAll();
+    //    public List<QueTask> listAll(){
+//        return queRepository.findAll();
+//    }
+    public List<QueTask> listAll() {
+        return queRepository.showOnlyStatusWaiting();
     }
+
     public List<QueTask> saveQueTask(QueTaskRequest request) {
         List<QueTask> queTaskList = new ArrayList<>();
         if (request.getValueType() != 3) {
