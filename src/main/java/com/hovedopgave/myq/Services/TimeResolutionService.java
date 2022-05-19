@@ -14,4 +14,7 @@ public class TimeResolutionService {
     public List<TimeResolution> findAll(){
         return timeResolutionRepository.findAll();
     }
+    public List<TimeResolution> showAllTimes() {
+        return timeResolutionRepository.findAllTimeResolutions();
+    }
 }

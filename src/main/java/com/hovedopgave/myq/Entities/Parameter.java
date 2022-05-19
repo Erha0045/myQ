@@ -1,19 +1,21 @@
 package com.hovedopgave.myq.Entities;
 
 import javax.persistence.*;
-import java.util.Objects;
+
 @Entity
-@Table(name = "parameter",schema = "public")
+//@Table(name = "parameter",schema = "public")
 //following line is for postgreSql
-//@Table(name = "parameter",schema = "polygon")
+@Table(name = "parameter",schema = "polygon")
 public class Parameter {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private int element_number;
+    @Column(name = "element_number")
+    private int elementNumber;
     private Long polygon_calculate_method_id;
-    private long time_resolution_id;
+    @Column(name = "time_resolution_id")
+    private long timeResolutionId;
     private Long base_calculate_method_id;
     private long parameter_type_id;
     private String map_type;
@@ -23,13 +25,18 @@ public class Parameter {
     public Parameter() {
     }
 
+    public Parameter(String name, long time_resolution_id) {
+        this.name = name;
+        this.timeResolutionId = time_resolution_id;
+    }
+
     public Parameter(String name, int element_number, Long polygon_calculate_method_id, long time_resolution_id,
                      Long base_calculate_method_id, long parameter_type_id, String map_type, Long unit_id,
                      String map_name) {
         this.name = name;
-        this.element_number = element_number;
+        this.elementNumber = element_number;
         this.polygon_calculate_method_id = polygon_calculate_method_id;
-        this.time_resolution_id = time_resolution_id;
+        this.timeResolutionId = time_resolution_id;
         this.base_calculate_method_id = base_calculate_method_id;
         this.parameter_type_id = parameter_type_id;
         this.map_type = map_type;
@@ -45,16 +52,16 @@ public class Parameter {
         return name;
     }
 
-    public int getElement_number() {
-        return element_number;
+    public int getElementNumber() {
+        return elementNumber;
     }
 
     public Long getPolygon_calculate_method_id() {
         return polygon_calculate_method_id;
     }
 
-    public long getTime_resolution_id() {
-        return time_resolution_id;
+    public long getTimeResolutionId() {
+        return timeResolutionId;
     }
 
     public Long getBase_calculate_method_id() {
@@ -82,9 +89,9 @@ public class Parameter {
         return "Parameter{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", element_number=" + element_number +
+                ", element_number=" + elementNumber +
                 ", polygon_calculate_method_id=" + polygon_calculate_method_id +
-                ", time_resolution_id=" + time_resolution_id +
+                ", time_resolution_id=" + timeResolutionId +
                 ", base_calculate_method_id=" + base_calculate_method_id +
                 ", parameter_type_id=" + parameter_type_id +
                 ", map_type='" + map_type + '\'' +

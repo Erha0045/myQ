@@ -1,69 +1,176 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+            crossorigin="anonymous"></script>
+    <!-- Datepicker -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+          integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta charset="UTF-8">
-    <title>Hello world</title>
+    <title>MyQ App</title>
 </head>
 <body>
-<H1>Parameter liste</H1>
-<div class="container">
-    <h2>Time Resolution Table</h2>
-    <table class = "table">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">description</th>
-            <th scope="col">format</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="time : ${showTime}">
-            <td th:text="${time.id}">id</td>
-            <td th:text="${time.name}">Name</td>
-            <td th:text="${time.description}">Description</td>
-            <td th:text="${time.format}">Format</td>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var parameterList = /*[[${plist}]]*/
+        /*]]>*/
+        function filterParameter(parameterList) {
+            var timeResolutionDropDown = document.getElementById('timeResolutionDropDown');
+            var selectedTimeResolutionId = timeResolutionDropDown.options[timeResolutionDropDown.selectedIndex].value;
+            console.log("Selected time Resolution Id: ", selectedTimeResolutionId); // en
+            var filteredParameters = [];
+            for (let i = 0; i < parameterList.length; i++) {
+                if (('' + parameterList[i].timeResolutionId) === selectedTimeResolutionId) {
+                    filteredParameters.push(parameterList[i]);
+                }
+            }
+            console.log('Filtered Params', filteredParameters);
+            var parameterDropDown = document.getElementById('parameterDropDown');
+            parameterDropDown.innerHTML = '';
+            for (let item of filteredParameters) {
+                parameterDropDown.innerHTML += `
+            <option value="${item.id}">${item.name}</option>
+        `
+            }
+            console.log('parameterDown: ', parameterDropDown.innerHTML);
+        }
 
-        </tr>
-        </tbody>
-    </table>
+    $(document).ready(function () {
+        filterParameter(parameterList);
+        $('#timeResolutionDropDown').on('change', function () {
+            filterParameter(parameterList);
+        });
+
+        /*$("#queTaskForm").submit(function (event) {
+            event.preventDefault();
+            var kullaniciForm = {}
+            kullaniciForm["parameterId"] = $("#parameterDropDown").val();
+            kullaniciForm["fromDate"] = $("#fromDate").val();
+            kullaniciForm["toDate"] = $("#toDate").val();
+            kullaniciForm["valueType"] = $('input[name="valueType"]:checked').val();
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/saveQueTask",
+                data: JSON.stringify(kullaniciForm),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    var json = "Ajax Cevap" + JSON.stringify(data, null, 4);
+                    console.log(json);
+                    $('#feedback').html(json);
+                },
+                error: function (e) {
+                    var json = "Ajax Hata"
+                        + e.responseText;
+                    $('#feedback').html(json);
+                }
+            });
+
+        });*/
+    });
+</script>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">MyQ App</a>
+    </div>
+</nav>
+
+<div class="container">
+    <form id="queTaskForm" method="post" th:action="@{/saveQueTask}" th:object="${queTaskRequest}">
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="timeResolutionDropDown">Valg tidsopløsning</label>
+                            <select class="form-control selectpicker" id="timeResolutionDropDown">
+                                <option th:each="time : ${dropDownElements}" th:text="${time.name}"
+                                        th:value="${time.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="parameterDropDown">Parameter</label>
+                            <select class="form-control selectpicker" id="parameterDropDown"
+                                    th:field="*{parameterId}" required>
+                                <option th:each="item : ${plist}" th:text="${item.name}" th:value="${item.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="fromDate">From Date:</label>
+                            <input type="text" class="form-control datepickercomp" id="fromDate"
+                                   data-provide="datepicker"
+                                   data-date-format="dd/mm/yyyy" th:field="*{fromDate}" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="toDate">To Date:</label>
+                            <input type="text" class="form-control datepickercomp" id="toDate"
+                                   data-provide="datepicker"
+                                   data-date-format="dd/mm/yyyy" th:field="*{toDate}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <fieldset id="group1">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="valueType" value="0" th:field="*{valueType}" required>Basis Values
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="valueType" value="1" th:field="*{valueType}">Derived Values
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="valueType" value="2" th:field="*{valueType}">Grid Files
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="valueType" value="3" th:field="*{valueType}">Polygon Values
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Create Que Task">
+            </div>
+        </div>
+    </form>
 </div>
-<div class="container">
-    <h2>Parameterlist Table</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">Element Name</th>
-            <th scope="col">Element Number</th>
-            <th scope="col">Polygon Calculate</th>
-            <th scope="col">Time Resolution</th>
-            <th scope="col">Base Calculate</th>
-            <th scope="col">Parameter Type</th>
-            <th scope="col">Map Type</th>
-            <th scope="col">Unit id</th>
-            <th scope="col">Map Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="element : ${plist}">
-            <td th:text="${element.id}">id</td>
-            <td th:text="${element.name}">Element Name</td>
-            <td th:text="${element.element_number}">Element Number</td>
-            <td th:text="${element.polygon_calculate_method_id}">Polygon Calculate</td>
-            <td th:text="${element.time_resolution_id}">Time Resolution</td>
-            <td th:text="${element.base_calculate_method_id}">Base Calculate</td>
-            <td th:text="${element.parameter_type_id}">Parameter Type</td>
-            <td th:text="${element.map_type}">Map Type</td>
-            <td th:text="${element.unit_id}">Unit id</td>
-            <td th:text="${element.map_name}">Map Name</td>
 
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
     <h2>Tasklist Table</h2>
     <table class="table">
         <thead>
@@ -77,8 +184,8 @@
             <th scope="col">Status</th>
             <th scope="col">Username</th>
             <th scope="col">User location</th>
-            <th scope="col">Depends on/th>
-            <th scope="col">Progress/th>
+            <th scope="col">Depends on</th>
+            <th scope="col">Progress</th>
         </tr>
         </thead>
         <tbody>
@@ -94,11 +201,10 @@
             <td th:text="${element.userlocation}">User location</td>
             <td th:text="${element.depends_on}">Depends on</td>
             <td th:text="${element.progress}">Progress</td>
-
         </tr>
         </tbody>
     </table>
-
 </div>
+
 </body>
 </html>

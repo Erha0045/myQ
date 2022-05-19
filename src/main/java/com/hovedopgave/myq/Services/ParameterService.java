@@ -14,9 +14,12 @@ public class ParameterService {
     //Field Injection
     @Autowired
     ParameterRepository parameterRepository;
-
-    public List<Parameter> listAll(){
+    public List<Parameter> listAll() {
         return parameterRepository.findAll();
+    }
+
+    public List<Parameter> findByTime(long id) {
+        return parameterRepository.findByTimeResolutionId(id);
     }
 
 }

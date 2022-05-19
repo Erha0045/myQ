@@ -8,6 +8,9 @@ import java.util.List;
 
 @Repository
 public interface ParameterRepository extends JpaRepository<Parameter, Long> {
-//    List<Parameter> paramlist();
-    //Branch testing
+//    @Query("SELECT u FROM Parameter u WHERE u.time_resolution_id = 1 ")
+//    List<Parameter> findAllParameters();
+
+    List<Parameter> findByTimeResolutionId(long timeResolutionId);
+
 }
