@@ -3,7 +3,9 @@ package com.hovedopgave.myq.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "time_resolution", schema = "polygon")
+@Table(name = "time_resolution", schema = "public")
+//following line is for postgreSql
+//@Table(name = "time_resolution", schema = "polygon")
 public class TimeResolution {
 
     @Id
@@ -12,6 +14,15 @@ public class TimeResolution {
     private String name;
     private String description;
     private String format;
+
+    public TimeResolution( String name, long id) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public TimeResolution() {
+
+    }
 
 
     public long getId() {

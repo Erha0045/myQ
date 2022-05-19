@@ -3,7 +3,9 @@ package com.hovedopgave.myq.Entities;
 import javax.persistence.*;
 import java.util.Objects;
 @Entity
-@Table(name = "parameter",schema = "polygon")
+@Table(name = "parameter",schema = "public")
+//following line is for postgreSql
+//@Table(name = "parameter",schema = "polygon")
 public class Parameter {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
