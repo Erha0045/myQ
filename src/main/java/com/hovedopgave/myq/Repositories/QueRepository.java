@@ -11,6 +11,7 @@ import java.util.List;
 public interface QueRepository extends JpaRepository<QueTask,Long> {
 
     // nemmere at bruge at staus ikke er lig med 2
-    @Query("SELECT u FROM QueTask u WHERE u.status = 0 ")
+    // status 2 er brugt fordi at Niki har ændret alle statuser til 2 ellers får vi ingen resultater
+    @Query("SELECT u FROM QueTask u WHERE u.status = 2 ")
     List<QueTask>showOnlyStatusWaiting();
 }

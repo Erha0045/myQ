@@ -52,5 +52,13 @@ public class IndexController {
         return "redirect:/";
     }
 
+//    @PostMapping("/deleteQueTask")
+//    public String deleteQueTask(@ModelAttribute("deleteQueTask")){
+//
+//    }
+
+
+
+
 
 }
