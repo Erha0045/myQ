@@ -1,0 +1,52 @@
+
+tr:hover {
+    background-color: #D6EEEE;
+}
+
+/*body {*/
+/*    text-align: center;*/
+/*}*/
+
+.bi-pencil-fill {
+    display: inline-flex;
+    height: 30px;
+    padding: 0 24px;
+    background: aliceblue;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    color: blue;
+}
+
+.bi-pencil-fill:hover {
+    background: lightskyblue;
+}
+
+.bi-pencil-fill:active {
+    background: deepskyblue;
+}
+
+.bi-trash3-fill {
+    display: inline-flex;
+    height: 30px;
+    padding: 0 24px;
+    background: aliceblue;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    color: red;
+}
+
+.bi-trash3-fill:hover {
+    background: lightskyblue;
+}
+
+.bi-trash3-fill:active {
+    background: deepskyblue;
+}
+
+
+
+
