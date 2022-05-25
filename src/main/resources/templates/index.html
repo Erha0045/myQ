@@ -52,7 +52,7 @@
             var timeResolutionDropDown = document.getElementById('timeResolutionDropDown');
             var selectedTimeResolutionId = timeResolutionDropDown.options[timeResolutionDropDown.selectedIndex].value;
             console.log("Selected time Resolution Id: ", selectedTimeResolutionId); // en
-            var filteredParameters = [];
+            let filteredParameters = [];
             for (let i = 0; i < parameterList.length; i++) {
                 if (('' + parameterList[i].timeResolutionId) === selectedTimeResolutionId) {
                     filteredParameters.push(parameterList[i]);
