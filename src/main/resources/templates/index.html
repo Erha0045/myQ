@@ -196,7 +196,8 @@
             <td th:text="${element.depends_on}">Depends on</td>
             <td th:text="${element.progress}">Progress</td>
             <td>
-                <a th:href="@{'/deleteBlacklistStation/' + ${element.id}}" class="bi bi-trash3-fill"
+               <a th:href="@{'/retry/' + ${element.id}} " class="bi bi-arrow-clockwise fs-4"> </a>
+                <a th:href="@{'/deleteBlacklistStation/' + ${element.id}}" class="bi bi-trash3-fill fs-4"
                    id="deleteButton"> </a>
             </td>
         </tr>

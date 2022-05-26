@@ -7,40 +7,42 @@ tr:hover {
 /*    text-align: center;*/
 /*}*/
 
-.bi-pencil-fill {
-    display: inline-flex;
-    height: 30px;
-    padding: 0 24px;
+.bi-arrow-clockwise {
+    display: table-cell;
+    height: auto;
+    margin-outside: 10;
+    padding: 10px;
     background: aliceblue;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
-    color: blue;
+    color: mediumblue;
 }
 
-.bi-pencil-fill:hover {
-    background: lightskyblue;
-}
-
-.bi-pencil-fill:active {
+.bi-arrow-clockwise:hover {
     background: deepskyblue;
 }
 
+.bi-arrow-clockwise:active {
+    background: yellowgreen;
+}
+
 .bi-trash3-fill {
-    display: inline-flex;
-    height: 30px;
-    padding: 0 24px;
+    display: table-cell;
+    height: auto;
+    margin-outside: 10;
+    padding: 10px;
     background: aliceblue;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     color: red;
 }
 
 .bi-trash3-fill:hover {
-    background: lightskyblue;
+    background: dodgerblue;
 }
 
 .bi-trash3-fill:active {
