@@ -13,14 +13,20 @@ public class Parameter {
     private String name;
     @Column(name = "element_number")
     private int elementNumber;
-    private Long polygon_calculate_method_id;
+    @Column(name = "polygon_calculate_method_id")
+    private Long polygonCalculateMethodId;
     @Column(name = "time_resolution_id")
     private long timeResolutionId;
-    private Long base_calculate_method_id;
-    private long parameter_type_id;
-    private String map_type;
-    private Long unit_id;
-    private String map_name;
+    @Column(name = "base_calculate_method_id")
+    private Long baseCalculateMethodId;
+    @Column(name = "parameter_type_id")
+    private long parameterTypeId;
+    @Column(name = "map_type")
+    private String mapType;
+    @Column(name = "unit_id")
+    private Long unitId;
+    @Column(name = "map_name")
+    private String mapName;
 
     public Parameter() {
     }
@@ -30,18 +36,18 @@ public class Parameter {
         this.timeResolutionId = time_resolution_id;
     }
 
-    public Parameter(String name, int element_number, Long polygon_calculate_method_id, long time_resolution_id,
-                     Long base_calculate_method_id, long parameter_type_id, String map_type, Long unit_id,
-                     String map_name) {
+    public Parameter(String name, int element_number, Long polygonCalculateMethodId, long time_resolution_id,
+                     Long baseCalculateMethodId, long parameterTypeId, String mapType, Long unitId,
+                     String mapName) {
         this.name = name;
         this.elementNumber = element_number;
-        this.polygon_calculate_method_id = polygon_calculate_method_id;
+        this.polygonCalculateMethodId = polygonCalculateMethodId;
         this.timeResolutionId = time_resolution_id;
-        this.base_calculate_method_id = base_calculate_method_id;
-        this.parameter_type_id = parameter_type_id;
-        this.map_type = map_type;
-        this.unit_id = unit_id;
-        this.map_name = map_name;
+        this.baseCalculateMethodId = baseCalculateMethodId;
+        this.parameterTypeId = parameterTypeId;
+        this.mapType = mapType;
+        this.unitId = unitId;
+        this.mapName = mapName;
     }
 
     public long getId() {
@@ -56,32 +62,32 @@ public class Parameter {
         return elementNumber;
     }
 
-    public Long getPolygon_calculate_method_id() {
-        return polygon_calculate_method_id;
+    public Long getPolygonCalculateMethodId() {
+        return polygonCalculateMethodId;
     }
 
     public long getTimeResolutionId() {
         return timeResolutionId;
     }
 
-    public Long getBase_calculate_method_id() {
-        return base_calculate_method_id;
+    public Long getBaseCalculateMethodId() {
+        return baseCalculateMethodId;
     }
 
-    public long getParameter_type_id() {
-        return parameter_type_id;
+    public long getParameterTypeId() {
+        return parameterTypeId;
     }
 
-    public String getMap_type() {
-        return map_type;
+    public String getMapType() {
+        return mapType;
     }
 
-    public Long getUnit_id() {
-        return unit_id;
+    public Long getUnitId() {
+        return unitId;
     }
 
-    public String getMap_name() {
-        return map_name;
+    public String getMapName() {
+        return mapName;
     }
 
     @Override
@@ -90,13 +96,13 @@ public class Parameter {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", element_number=" + elementNumber +
-                ", polygon_calculate_method_id=" + polygon_calculate_method_id +
+                ", polygon_calculate_method_id=" + polygonCalculateMethodId +
                 ", time_resolution_id=" + timeResolutionId +
-                ", base_calculate_method_id=" + base_calculate_method_id +
-                ", parameter_type_id=" + parameter_type_id +
-                ", map_type='" + map_type + '\'' +
-                ", unit_id=" + unit_id +
-                ", map_name='" + map_name + '\'' +
+                ", base_calculate_method_id=" + baseCalculateMethodId +
+                ", parameter_type_id=" + parameterTypeId +
+                ", map_type='" + mapType + '\'' +
+                ", unit_id=" + unitId +
+                ", map_name='" + mapName + '\'' +
                 '}';
     }
 }
