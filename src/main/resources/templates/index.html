@@ -188,7 +188,7 @@
             <td th:text="${element.parameter_id}">parameter_id</td>
             <td th:text="${#temporals.format(element.from_date, 'dd-MM-yyyy-HH:mm')}">from date</td>
             <td th:text="${#temporals.format(element.to_date, 'dd-MM-yyyy-HH:mm')}">To date</td>
-            <td th:text="${element.valuetype}">Valuetype</td>
+            <td th:text="${T(com.hovedopgave.myq.enums.ValueType).getById(element.valuetype)}">Valuetype</td>
             <td th:text="${element.num_tries}">Tries</td>
             <td th:text="${element.status}" th:value="waiting">status</td>
             <td th:text="${element.username}">Username</td>

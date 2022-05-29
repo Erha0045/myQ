@@ -1,7 +1,9 @@
 package com.hovedopgave.myq.Services;
 
 import com.hovedopgave.myq.Entities.QueTask;
+import com.hovedopgave.myq.Repositories.ParameterRepository;
 import com.hovedopgave.myq.Repositories.QueRepository;
+import com.hovedopgave.myq.enums.ValueType;
 import com.hovedopgave.myq.model.QueTaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,35 +20,76 @@ public class QueService {
     @Autowired
     QueRepository queRepository;
 
-    //    public List<QueTask> listAll(){
-//        return queRepository.findAll();
-//    }
+    @Autowired
+    private ParameterRepository parameterRepository;
+
     public List<QueTask> listAll() {
         return queRepository.showOnlyStatusWaiting();
     }
 
     public List<QueTask> saveQueTask(QueTaskRequest request) {
         List<QueTask> queTaskList = new ArrayList<>();
-        if (request.getValueType() != 3) {
-            QueTask queTask = new QueTask();
-            queTask.setFrom_date(toZonedDateTime(request.getFromDate()));
-            queTask.setTo_date(toZonedDateTime(request.getToDate()));
-            queTask.setParameter_id(request.getParameterId());
-            queTask.setValuetype(request.getValueType().intValue());
+        if (!ValueType.isPolygon(request.getValueType().intValue())) {
+        if (request.getValueType() == ValueType.BASIS.getId()) {
+            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
             QueTask save = queRepository.save(queTask);
             queTaskList.add(save);
+        } else if (request.getValueType() == ValueType.DERIVED.getId()) {
+            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
+            QueTask savedBasisQueTask = queRepository.save(queTask);
+            queTaskList.add(savedBasisQueTask);
+            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
+            QueTask savedDerivedQueTask = queRepository.save(queTask);
+            queTaskList.add(savedDerivedQueTask);
+        } else if (request.getValueType() == ValueType.GRID.getId()) {
+            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
+            QueTask savedBasisQueTask = queRepository.save(queTask);
+            queTaskList.add(savedBasisQueTask);
+            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
+            QueTask savedDerivedQueTask = queRepository.save(queTask);
+            queTaskList.add(savedDerivedQueTask);
+            queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId());
+            QueTask savedGridQueTask = queRepository.save(queTask);
+            queTaskList.add(savedGridQueTask);
+        }
             return queTaskList;
         } else {
+            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
+            QueTask savedBasisQueTask = queRepository.save(queTask);
+            queTaskList.add(savedBasisQueTask);
+            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
+            QueTask savedDerivedQueTask = queRepository.save(queTask);
+            queTaskList.add(savedDerivedQueTask);
+            queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId());
+            QueTask savedGridQueTask = queRepository.save(queTask);
+            queTaskList.add(savedGridQueTask);
             for (int i = 0; i <= 4; i++) {
-                QueTask queTask = new QueTask();
-                queTask.setFrom_date(toZonedDateTime(request.getFromDate()));
-                queTask.setTo_date(toZonedDateTime(request.getToDate()));
-                queTask.setParameter_id(request.getParameterId());
-                queTask.setValuetype(3 + i);
-                queTaskList.add(queTask);
+                QueTask temp = new QueTask();
+                temp.setFrom_date(toZonedDateTime(request.getFromDate()));
+                temp.setTo_date(toZonedDateTime(request.getToDate()));
+                temp.setParameter_id(request.getParameterId());
+                temp.setValuetype(3 + i);
+                temp.setUsername("MCS-G's");
+                if (i == 0) {
+                    temp.setDepends_on(savedGridQueTask.getId());
+                } else {
+                    temp.setDepends_on(queTaskList.get(queTaskList.size() - 1).getId());
+                }
+                queRepository.save(temp);
+                queTaskList.add(temp);
             }
-            return queRepository.saveAll(queTaskList);
+            return queTaskList;
         }
+    }
+
+    private QueTask getQueTask(QueTaskRequest request, Long dependsOn, int valueType) {
+        QueTask queTask = new QueTask();
+        queTask.setFrom_date(toZonedDateTime(request.getFromDate()));
+        queTask.setTo_date(toZonedDateTime(request.getToDate()));
+        queTask.setValuetype(valueType);
+        queTask.setUsername("MCS-G's");
+        queTask.setDepends_on(dependsOn);
+        return queTask;
     }
 
     private ZonedDateTime toZonedDateTime(String date) {
