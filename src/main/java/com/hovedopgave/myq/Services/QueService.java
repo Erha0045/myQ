@@ -55,4 +55,11 @@ public class QueService {
         return localDate.atStartOfDay(ZoneId.systemDefault());
     }
 
+    public void deleteQueTask(long id) {
+        QueTask queTask = queRepository.getById(id);
+        if (queTask != null){
+            queTask.setStatus(2);
+            queRepository.save(queTask);
+        }
+    }
 }

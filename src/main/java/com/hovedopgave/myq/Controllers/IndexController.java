@@ -56,6 +56,11 @@ public class IndexController {
 //    public String deleteQueTask(@ModelAttribute("deleteQueTask")){
 //
 //    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id){
+        queService.deleteQueTask(id);
+        return "redirect:/";
+    }
 
 
 
