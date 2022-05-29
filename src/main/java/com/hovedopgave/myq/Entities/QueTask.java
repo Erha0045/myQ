@@ -15,30 +15,36 @@ public class QueTask {
 
     private long parameter_id;
 
-    private ZonedDateTime from_date;
-    private ZonedDateTime to_date;
-    private int valuetype;
-    private int num_tries;
+    @Column(name = "from_date")
+    private ZonedDateTime fromDate;
+    @Column(name = "to_date")
+    private ZonedDateTime toDate;
+    @Column(name = "valuetype")
+    private int valueType;
+    @Column(name = "num_tries")
+    private int numTries;
     private int status;
     private String username;
-    private String userlocation;
-    private Long depends_on;
+    @Column(name = "userlocation")
+    private String userLocation;
+    @Column(name = "depends_on")
+    private Long dependsOn;
     private String progress;
 
     public QueTask() {
     }
 
-    public QueTask(long parameter_id, ZonedDateTime from_date, ZonedDateTime to_date, int valuetype, int num_tries,
-                   int status, String username, String userlocation, Long depends_on, String progress) {
+    public QueTask(long parameter_id, ZonedDateTime fromDate, ZonedDateTime toDate, int valueType, int numTries,
+                   int status, String username, String userLocation, Long dependsOn, String progress) {
         this.parameter_id = parameter_id;
-        this.from_date = from_date;
-        this.to_date = to_date;
-        this.valuetype = valuetype;
-        this.num_tries = num_tries;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.valueType = valueType;
+        this.numTries = numTries;
         this.status = status;
         this.username = username;
-        this.userlocation = userlocation;
-        this.depends_on = depends_on;
+        this.userLocation = userLocation;
+        this.dependsOn = dependsOn;
         this.progress = progress;
     }
 
@@ -58,36 +64,36 @@ public class QueTask {
         this.parameter_id = parameter_id;
     }
 
-    public ZonedDateTime getFrom_date() {
-        return from_date;
+    public ZonedDateTime getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom_date(ZonedDateTime from_date) {
-        this.from_date = from_date;
+    public void setFromDate(ZonedDateTime from_date) {
+        this.fromDate = from_date;
     }
 
-    public ZonedDateTime getTo_date() {
-        return to_date;
+    public ZonedDateTime getToDate() {
+        return toDate;
     }
 
-    public void setTo_date(ZonedDateTime to_date) {
-        this.to_date = to_date;
+    public void setToDate(ZonedDateTime to_date) {
+        this.toDate = to_date;
     }
 
-    public int getValuetype() {
-        return valuetype;
+    public int getValueType() {
+        return valueType;
     }
 
-    public void setValuetype(int valuetype) {
-        this.valuetype = valuetype;
+    public void setValueType(int valuetype) {
+        this.valueType = valuetype;
     }
 
-    public int getNum_tries() {
-        return num_tries;
+    public int getNumTries() {
+        return numTries;
     }
 
-    public void setNum_tries(int num_tries) {
-        this.num_tries = num_tries;
+    public void setNumTries(int num_tries) {
+        this.numTries = num_tries;
     }
 
     public int getStatus() {
@@ -106,20 +112,20 @@ public class QueTask {
         this.username = username;
     }
 
-    public String getUserlocation() {
-        return userlocation;
+    public String getUserLocation() {
+        return userLocation;
     }
 
-    public void setUserlocation(String userlocation) {
-        this.userlocation = userlocation;
+    public void setUserLocation(String userlocation) {
+        this.userLocation = userlocation;
     }
 
-    public Long getDepends_on() {
-        return depends_on;
+    public Long getDependsOn() {
+        return dependsOn;
     }
 
-    public void setDepends_on(Long depends_on) {
-        this.depends_on = depends_on;
+    public void setDependsOn(Long depends_on) {
+        this.dependsOn = depends_on;
     }
 
     public String getProgress() {
@@ -135,14 +141,14 @@ public class QueTask {
         return "QueTask{" +
                 "id=" + id +
                 ", parameter_id=" + parameter_id +
-                ", from_date=" + from_date +
-                ", to_date=" + to_date +
-                ", valuetype=" + valuetype +
-                ", num_tries=" + num_tries +
+                ", from_date=" + fromDate +
+                ", to_date=" + toDate +
+                ", valuetype=" + valueType +
+                ", num_tries=" + numTries +
                 ", status=" + status +
                 ", username='" + username + '\'' +
-                ", userlocation='" + userlocation + '\'' +
-                ", depends_on=" + depends_on +
+                ", userlocation='" + userLocation + '\'' +
+                ", depends_on=" + dependsOn +
                 ", progress='" + progress + '\'' +
                 '}';
     }

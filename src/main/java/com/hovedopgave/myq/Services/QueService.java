@@ -65,15 +65,15 @@ public class QueService {
             queTaskList.add(savedGridQueTask);
             for (int i = 0; i <= 4; i++) {
                 QueTask temp = new QueTask();
-                temp.setFrom_date(toZonedDateTime(request.getFromDate()));
-                temp.setTo_date(toZonedDateTime(request.getToDate()));
+                temp.setFromDate(toZonedDateTime(request.getFromDate()));
+                temp.setToDate(toZonedDateTime(request.getToDate()));
                 temp.setParameter_id(request.getParameterId());
-                temp.setValuetype(3 + i);
+                temp.setValueType(3 + i);
                 temp.setUsername("MCS-G's");
                 if (i == 0) {
-                    temp.setDepends_on(savedGridQueTask.getId());
+                    temp.setDependsOn(savedGridQueTask.getId());
                 } else {
-                    temp.setDepends_on(queTaskList.get(queTaskList.size() - 1).getId());
+                    temp.setDependsOn(queTaskList.get(queTaskList.size() - 1).getId());
                 }
                 queRepository.save(temp);
                 queTaskList.add(temp);
@@ -84,11 +84,11 @@ public class QueService {
 
     private QueTask getQueTask(QueTaskRequest request, Long dependsOn, int valueType) {
         QueTask queTask = new QueTask();
-        queTask.setFrom_date(toZonedDateTime(request.getFromDate()));
-        queTask.setTo_date(toZonedDateTime(request.getToDate()));
-        queTask.setValuetype(valueType);
+        queTask.setFromDate(toZonedDateTime(request.getFromDate()));
+        queTask.setToDate(toZonedDateTime(request.getToDate()));
+        queTask.setValueType(valueType);
         queTask.setUsername("MCS-G's");
-        queTask.setDepends_on(dependsOn);
+        queTask.setDependsOn(dependsOn);
         return queTask;
     }
 
@@ -110,7 +110,7 @@ public class QueService {
         QueTask queTask = queRepository.getById(id);
         if (queTask != null) {
             queTask.setStatus(0);
-            queTask.setNum_tries(queTask.getNum_tries() + 1);
+            queTask.setNumTries(queTask.getNumTries() + 1);
             queRepository.save(queTask);
         }
     }

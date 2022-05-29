@@ -186,14 +186,14 @@
         <tr th:each="element : ${qList}">
             <td th:text="${element.id}">id</td>
             <td th:text="${element.parameter_id}">parameter_id</td>
-            <td th:text="${#temporals.format(element.from_date, 'dd-MM-yyyy-HH:mm')}">from date</td>
-            <td th:text="${#temporals.format(element.to_date, 'dd-MM-yyyy-HH:mm')}">To date</td>
-            <td th:text="${T(com.hovedopgave.myq.enums.ValueType).getById(element.valuetype)}">Valuetype</td>
-            <td th:text="${element.num_tries}">Tries</td>
+            <td th:text="${#temporals.format(element.fromDate, 'dd-MM-yyyy-HH:mm')}">from date</td>
+            <td th:text="${#temporals.format(element.toDate, 'dd-MM-yyyy-HH:mm')}">To date</td>
+            <td th:text="${T(com.hovedopgave.myq.enums.ValueType).getById(element.valueType)}">Valuetype</td>
+            <td th:text="${element.numTries}">Tries</td>
             <td th:text="${element.status}" th:value="waiting">status</td>
             <td th:text="${element.username}">Username</td>
-            <td th:text="${element.userlocation}">User location</td>
-            <td th:text="${element.depends_on}">Depends on</td>
+            <td th:text="${element.userLocation}">User location</td>
+            <td th:text="${element.dependsOn}">Depends on</td>
             <td th:text="${element.progress}">Progress</td>
             <td>
                <a class="bi bi-arrow-clockwise fs-4" id="retryButton" th:if="${element.status == 3}"
