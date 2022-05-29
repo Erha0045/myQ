@@ -62,4 +62,13 @@ public class QueService {
             queRepository.save(queTask);
         }
     }
+
+    public void retryQueTask(long id) {
+        QueTask queTask = queRepository.getById(id);
+        if (queTask != null) {
+            queTask.setStatus(0);
+            queTask.setNum_tries(queTask.getNum_tries() + 1);
+            queRepository.save(queTask);
+        }
+    }
 }

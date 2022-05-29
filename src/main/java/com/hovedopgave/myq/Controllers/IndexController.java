@@ -52,13 +52,15 @@ public class IndexController {
         return "redirect:/";
     }
 
-//    @PostMapping("/deleteQueTask")
-//    public String deleteQueTask(@ModelAttribute("deleteQueTask")){
-//
-//    }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id){
         queService.deleteQueTask(id);
+        return "redirect:/";
+    }
+    @GetMapping("/retry/{id}")
+    public String retry(@PathVariable("id")long id){
+        queService.retryQueTask(id);
         return "redirect:/";
     }
 
