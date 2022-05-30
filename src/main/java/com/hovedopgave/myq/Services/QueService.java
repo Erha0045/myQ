@@ -67,7 +67,7 @@ public class QueService {
                 QueTask temp = new QueTask();
                 temp.setFromDate(toZonedDateTime(request.getFromDate()));
                 temp.setToDate(toZonedDateTime(request.getToDate()));
-                temp.setParameter_id(request.getParameterId());
+                temp.setParameter(parameterRepository.getById(request.getParameterId()));
                 temp.setValueType(3 + i);
                 temp.setUsername("MCS-G's");
                 if (i == 0) {
@@ -86,6 +86,7 @@ public class QueService {
         QueTask queTask = new QueTask();
         queTask.setFromDate(toZonedDateTime(request.getFromDate()));
         queTask.setToDate(toZonedDateTime(request.getToDate()));
+        queTask.setParameter(parameterRepository.getById((request.getParameterId())));
         queTask.setValueType(valueType);
         queTask.setUsername("MCS-G's");
         queTask.setDependsOn(dependsOn);

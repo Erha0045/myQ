@@ -13,7 +13,9 @@ public class QueTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long parameter_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parameter_id")
+    private Parameter parameter;
 
     @Column(name = "from_date")
     private ZonedDateTime fromDate;
@@ -31,22 +33,6 @@ public class QueTask {
     private Long dependsOn;
     private String progress;
 
-    public QueTask() {
-    }
-
-    public QueTask(long parameter_id, ZonedDateTime fromDate, ZonedDateTime toDate, int valueType, int numTries,
-                   int status, String username, String userLocation, Long dependsOn, String progress) {
-        this.parameter_id = parameter_id;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.valueType = valueType;
-        this.numTries = numTries;
-        this.status = status;
-        this.username = username;
-        this.userLocation = userLocation;
-        this.dependsOn = dependsOn;
-        this.progress = progress;
-    }
 
     public long getId() {
         return id;
@@ -54,14 +40,6 @@ public class QueTask {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getParameter_id() {
-        return parameter_id;
-    }
-
-    public void setParameter_id(long parameter_id) {
-        this.parameter_id = parameter_id;
     }
 
     public ZonedDateTime getFromDate() {
@@ -136,20 +114,11 @@ public class QueTask {
         this.progress = progress;
     }
 
-    @Override
-    public String toString() {
-        return "QueTask{" +
-                "id=" + id +
-                ", parameter_id=" + parameter_id +
-                ", from_date=" + fromDate +
-                ", to_date=" + toDate +
-                ", valuetype=" + valueType +
-                ", num_tries=" + numTries +
-                ", status=" + status +
-                ", username='" + username + '\'' +
-                ", userlocation='" + userLocation + '\'' +
-                ", depends_on=" + dependsOn +
-                ", progress='" + progress + '\'' +
-                '}';
+    public Parameter getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(Parameter parameterId) {
+        this.parameter = parameterId;
     }
 }

@@ -63,7 +63,7 @@
             parameterDropDown.innerHTML = '';
             for (let item of filteredParameters) {
                 parameterDropDown.innerHTML += `
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${item.elementNumber} ${item.name}</option>
         `
             }
             console.log('parameterDown: ', parameterDropDown.innerHTML);
@@ -185,7 +185,7 @@
         <tbody>
         <tr th:each="element : ${qList}">
             <td th:text="${element.id}">id</td>
-            <td th:text="${element.parameter_id}">parameter_id</td>
+            <td th:text="${element.parameter}">Parameter_id</td>
             <td th:text="${#temporals.format(element.fromDate, 'dd-MM-yyyy-HH:mm')}">from date</td>
             <td th:text="${#temporals.format(element.toDate, 'dd-MM-yyyy-HH:mm')}">To date</td>
             <td th:text="${T(com.hovedopgave.myq.enums.ValueType).getById(element.valueType)}">Valuetype</td>
