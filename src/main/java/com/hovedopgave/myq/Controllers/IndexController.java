@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -46,8 +47,8 @@ public class IndexController {
     }
 
     @PostMapping("/saveQueTask")
-    public String saveQueTask(@ModelAttribute("queTaskRequest") QueTaskRequest queTaskRequest, Model model) {
-        List<QueTask> queTaskList = queService.saveQueTask(queTaskRequest);
+    public String saveQueTask(@ModelAttribute("queTaskRequest") QueTaskRequest queTaskRequest, Model model, HttpServletRequest httpServletRequest) {
+        List<QueTask> queTaskList = queService.saveQueTask(queTaskRequest, httpServletRequest);
         model.addAttribute("qList", queTaskList);
         return "redirect:/";
     }

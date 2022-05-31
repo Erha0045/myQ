@@ -5,9 +5,11 @@ import com.hovedopgave.myq.Repositories.ParameterRepository;
 import com.hovedopgave.myq.Repositories.QueRepository;
 import com.hovedopgave.myq.enums.ValueType;
 import com.hovedopgave.myq.model.QueTaskRequest;
+import com.hovedopgave.myq.util.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -18,49 +20,50 @@ import java.util.List;
 @Service
 public class QueService {
     @Autowired
-    QueRepository queRepository;
-
+    private QueRepository queRepository;
     @Autowired
     private ParameterRepository parameterRepository;
+    @Autowired
+    private RequestService requestService;
 
     public List<QueTask> listAll() {
         return queRepository.showOnlyStatusWaiting();
     }
 
-    public List<QueTask> saveQueTask(QueTaskRequest request) {
+    public List<QueTask> saveQueTask(QueTaskRequest request, HttpServletRequest httpServletRequest) {
         List<QueTask> queTaskList = new ArrayList<>();
         if (!ValueType.isPolygon(request.getValueType().intValue())) {
-        if (request.getValueType() == ValueType.BASIS.getId()) {
-            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
-            QueTask save = queRepository.save(queTask);
-            queTaskList.add(save);
-        } else if (request.getValueType() == ValueType.DERIVED.getId()) {
-            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
-            QueTask savedBasisQueTask = queRepository.save(queTask);
-            queTaskList.add(savedBasisQueTask);
-            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
-            QueTask savedDerivedQueTask = queRepository.save(queTask);
-            queTaskList.add(savedDerivedQueTask);
-        } else if (request.getValueType() == ValueType.GRID.getId()) {
-            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
-            QueTask savedBasisQueTask = queRepository.save(queTask);
-            queTaskList.add(savedBasisQueTask);
-            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
-            QueTask savedDerivedQueTask = queRepository.save(queTask);
-            queTaskList.add(savedDerivedQueTask);
-            queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId());
-            QueTask savedGridQueTask = queRepository.save(queTask);
-            queTaskList.add(savedGridQueTask);
-        }
+            if (request.getValueType() == ValueType.BASIS.getId()) {
+                QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId(), httpServletRequest);
+                QueTask save = queRepository.save(queTask);
+                queTaskList.add(save);
+            } else if (request.getValueType() == ValueType.DERIVED.getId()) {
+                QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId(), httpServletRequest);
+                QueTask savedBasisQueTask = queRepository.save(queTask);
+                queTaskList.add(savedBasisQueTask);
+                queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId(), httpServletRequest);
+                QueTask savedDerivedQueTask = queRepository.save(queTask);
+                queTaskList.add(savedDerivedQueTask);
+            } else if (request.getValueType() == ValueType.GRID.getId()) {
+                QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId(), httpServletRequest);
+                QueTask savedBasisQueTask = queRepository.save(queTask);
+                queTaskList.add(savedBasisQueTask);
+                queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId(), httpServletRequest);
+                QueTask savedDerivedQueTask = queRepository.save(queTask);
+                queTaskList.add(savedDerivedQueTask);
+                queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId(), httpServletRequest);
+                QueTask savedGridQueTask = queRepository.save(queTask);
+                queTaskList.add(savedGridQueTask);
+            }
             return queTaskList;
         } else {
-            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId());
+            QueTask queTask = getQueTask(request, null, ValueType.BASIS.getId(), httpServletRequest);
             QueTask savedBasisQueTask = queRepository.save(queTask);
             queTaskList.add(savedBasisQueTask);
-            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId());
+            queTask = getQueTask(request, savedBasisQueTask.getId(), ValueType.DERIVED.getId(), httpServletRequest);
             QueTask savedDerivedQueTask = queRepository.save(queTask);
             queTaskList.add(savedDerivedQueTask);
-            queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId());
+            queTask = getQueTask(request, savedDerivedQueTask.getId(), ValueType.GRID.getId(), httpServletRequest);
             QueTask savedGridQueTask = queRepository.save(queTask);
             queTaskList.add(savedGridQueTask);
             for (int i = 0; i <= 4; i++) {
@@ -69,7 +72,8 @@ public class QueService {
                 temp.setToDate(toZonedDateTime(request.getToDate()));
                 temp.setParameter(parameterRepository.getById(request.getParameterId()));
                 temp.setValueType(3 + i);
-                temp.setUsername("MCS-G's");
+                temp.setUsername("MCS-GRP");
+                temp.setUserLocation(requestService.getClientIp(httpServletRequest));
                 if (i == 0) {
                     temp.setDependsOn(savedGridQueTask.getId());
                 } else {
@@ -82,13 +86,14 @@ public class QueService {
         }
     }
 
-    private QueTask getQueTask(QueTaskRequest request, Long dependsOn, int valueType) {
+    private QueTask getQueTask(QueTaskRequest request, Long dependsOn, int valueType, HttpServletRequest httpServletRequest) {
         QueTask queTask = new QueTask();
         queTask.setFromDate(toZonedDateTime(request.getFromDate()));
         queTask.setToDate(toZonedDateTime(request.getToDate()));
-        queTask.setParameter(parameterRepository.getById((request.getParameterId())));
+        queTask.setParameter(parameterRepository.getById(request.getParameterId()));
         queTask.setValueType(valueType);
-        queTask.setUsername("MCS-G's");
+        queTask.setUsername("MCS-GRP");
+        queTask.setUserLocation(requestService.getClientIp(httpServletRequest));
         queTask.setDependsOn(dependsOn);
         return queTask;
     }

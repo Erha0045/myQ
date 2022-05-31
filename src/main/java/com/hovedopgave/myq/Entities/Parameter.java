@@ -36,18 +36,18 @@ public class Parameter {
         this.timeResolutionId = time_resolution_id;
     }
 
-    public Parameter(String name, int element_number, Long polygonCalculateMethodId, long time_resolution_id,
-                     Long baseCalculateMethodId, long parameterTypeId, String mapType, Long unitId,
-                     String mapName) {
+    public Parameter(String name, int element_number, Long polygon_calculate_method_id, long time_resolution_id,
+                     Long base_calculate_method_id, long parameter_type_id, String map_type, Long unit_id,
+                     String map_name) {
         this.name = name;
         this.elementNumber = element_number;
-        this.polygonCalculateMethodId = polygonCalculateMethodId;
+        this.polygonCalculateMethodId = polygon_calculate_method_id;
         this.timeResolutionId = time_resolution_id;
-        this.baseCalculateMethodId = baseCalculateMethodId;
-        this.parameterTypeId = parameterTypeId;
-        this.mapType = mapType;
-        this.unitId = unitId;
-        this.mapName = mapName;
+        this.baseCalculateMethodId = base_calculate_method_id;
+        this.parameterTypeId = parameter_type_id;
+        this.mapType = map_type;
+        this.unitId = unit_id;
+        this.mapName = map_name;
     }
 
     public long getId() {
