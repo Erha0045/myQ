@@ -3,6 +3,7 @@ package com.hovedopgave.myq.Services;
 import com.hovedopgave.myq.Entities.QueTask;
 import com.hovedopgave.myq.Repositories.ParameterRepository;
 import com.hovedopgave.myq.Repositories.QueRepository;
+import com.hovedopgave.myq.enums.Status;
 import com.hovedopgave.myq.enums.ValueType;
 import com.hovedopgave.myq.model.QueTaskRequest;
 import com.hovedopgave.myq.util.RequestService;
@@ -110,6 +111,10 @@ public class QueService {
             queTask.setStatus(2);
             queRepository.save(queTask);
         }
+        QueTask byId = queRepository.findByDependsOn(queTask.getId());
+        if (byId != null) {
+            deleteQueTask(byId.getId());
+        }
     }
 
     public void retryQueTask(long id) {
@@ -118,6 +123,10 @@ public class QueService {
             queTask.setStatus(0);
             queTask.setNumTries(queTask.getNumTries() + 1);
             queRepository.save(queTask);
+        }
+        QueTask byId = queRepository.findByDependsOnAndStatus(queTask.getId(), Status.FAILED.getId());
+        if (byId != null) {
+            retryQueTask(byId.getId());
         }
     }
 }

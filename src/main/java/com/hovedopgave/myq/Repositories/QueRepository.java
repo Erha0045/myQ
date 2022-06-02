@@ -10,8 +10,10 @@ import java.util.List;
 @Repository
 public interface QueRepository extends JpaRepository<QueTask,Long> {
 
-    // nemmere at bruge at staus ikke er lig med 2
-    // status 2 er brugt fordi at Niki har ændret alle statuser til 2 ellers får vi ingen resultater
     @Query("SELECT u FROM QueTask u WHERE u.status in (0,1,2,3)")
     List<QueTask>showOnlyStatusWaiting();
+
+    QueTask findByDependsOn(Long id);
+
+    QueTask findByDependsOnAndStatus(long id, int status);
 }
