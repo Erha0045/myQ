@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="timeResolutionDropDown">Valg tidsopløsning</label>
+                            <label for="timeResolutionDropDown"><b>Choose Time Resolution</b></label>
                             <select class="form-control selectpicker" id="timeResolutionDropDown">
                                 <option th:each="time : ${dropDownElements}" th:text="${time.name}"
                                         th:value="${time.id}"></option>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="parameterDropDown">Parameter</label>
+                            <label for="parameterDropDown"><b>Choose Parameter</b></label>
                             <select class="form-control selectpicker" id="parameterDropDown"
                                     th:field="*{parameterId}" required>
                                 <option th:each="item : ${plist}" th:text="|${item.elementNumber}  ${item.name}|"
@@ -111,7 +111,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="fromDate">From Date:</label>
+                            <label for="fromDate"><b>From Date:</b></label>
                             <input type="text" class="form-control datepickercomp" id="fromDate"
                                    data-provide="datepicker"
                                    data-date-format="dd/mm/yyyy" th:field="*{fromDate}" required>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="toDate">To Date:</label>
+                            <label for="toDate"><b>To Date:</b></label>
                             <input type="text" class="form-control datepickercomp" id="toDate"
                                    data-provide="datepicker"
                                    data-date-format="dd/mm/yyyy" th:field="*{toDate}" required>
@@ -129,7 +129,7 @@
             </div>
             <div class="col-3">
                 <fieldset id="group1">
-                    <label style="color: red"><b> Choose a Data type:</b></label>
+                    <label> <b>Choose Data type:</b></label>
 
                     <div class="form-check">
                         <label class="form-check-label">
@@ -173,9 +173,9 @@
             <th scope="col">ID</th>
             <th scope="col">Element Number</th>
             <th scope="col">Element Name</th>
-            <th scope="col">From date</th>
-            <th scope="col">To date</th>
-            <th scope="col">Value Type</th>
+            <th scope="col">From Date</th>
+            <th scope="col">To Date</th>
+            <th scope="col">Data Type</th>
             <th scope="col">Tries</th>
             <th scope="col">Status</th>
             <th scope="col">Username</th>
