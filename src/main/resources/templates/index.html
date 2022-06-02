@@ -39,8 +39,6 @@
     var parameterList = /*[[${plist}]]*/
         /*]]>*/
 
-        // var parameterList = [[${plist}]]
-// var parameterList = /*[[${plist}]]*/
         function filterParameter(parameterList) {
             var timeResolutionDropDown = document.getElementById('timeResolutionDropDown');
             var selectedTimeResolutionId = timeResolutionDropDown.options[timeResolutionDropDown.selectedIndex].value;
@@ -100,13 +98,6 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <!-- -->
-                        <div class="form-group">
-                            <label for="dtpickerdemo" class="col-sm-2 control-label">Select date/time:</label>
-                            <div class='col-sm-4 input-group date'>
-                                <input type='text' class="form-control" id='dtpickerdemo' />
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="parameterDropDown">Parameter</label>
                             <select class="form-control selectpicker" id="parameterDropDown"
@@ -175,7 +166,6 @@
     </form>
 </div>
 <div class="container">
-    <!--    <h2>Tasklist Table</h2>-->
 
     <table class="table table-sortable content-table">
         <thead>
@@ -199,7 +189,6 @@
             <td th:text="${element.id}">ID</td>
             <td th:text="${element.parameter.elementNumber}">Element Number</td>
             <td th:text="${element.parameter.name}">Element Name</td>
-<!--            <td th:text="${element.parameter.elementNumber}">Parameter Id</td>-->
             <td th:text="${#temporals.format(element.fromDate, 'dd-MM-yyyy-HH:mm')}">From date</td>
             <td th:text="${#temporals.format(element.toDate, 'dd-MM-yyyy-HH:mm')}">To date</td>
             <td th:text="${T(com.hovedopgave.myq.enums.ValueType).getById(element.valueType)}">Valuetype</td>
