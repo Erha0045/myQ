@@ -21,10 +21,8 @@
           crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src=”//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js”></script>
-    <link href=”//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css” rel=”stylesheet”>
+
     <!--CSS style link-->
     <link rel="stylesheet" th:href="@{tablesort.css}">
     <link rel="stylesheet" th:href="@{mystyle.css}">
@@ -181,7 +179,7 @@
             <th scope="col">Username</th>
             <th scope="col">User Location</th>
             <th scope="col">Depends On</th>
-<!--            <th scope="col">Progress</th>-->
+            <!--            <th scope="col">Progress</th>-->
         </tr>
         </thead>
         <tbody>
@@ -197,7 +195,7 @@
             <td th:text="${element.username}">Username</td>
             <td th:text="${element.userLocation}">User location</td>
             <td th:text="${element.dependsOn}">Depends on</td>
-<!--            <td th:text="${element.progress}">Progress</td>-->
+            <!--            <td th:text="${element.progress}">Progress</td>-->
             <td>
                 <a class="bi bi-arrow-clockwise fs-4" id="retryButton" th:if="${element.status == 3}"
                    th:href="@{/retry/{id}(id=${element.id})}"> </a>
