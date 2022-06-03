@@ -41,13 +41,6 @@ public class IndexController {
         return "index";
     }
 
-//    @ResponseBody
-//    @GetMapping("/parameterbyid/{id}")
-//    public String loadParameterByTimeId(@PathVariable("id") long id) {
-//        Gson gson = new Gson();
-//        return gson.toJson(parameterService.findByTime(id));
-//    }
-
     @PostMapping("/saveQueTask")
     public String saveQueTask(@ModelAttribute("queTaskRequest") QueTaskRequest queTaskRequest, Model model, HttpServletRequest httpServletRequest, RedirectAttributes redirAttrs) {
         if (!StringUtils.hasLength(queTaskRequest.getFromDate())
