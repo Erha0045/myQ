@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
-//@Table(name = "climate_data_task",schema = "public")
-//following line is for postgreSql
 @Table(name = "climate_data_task",schema = "polygon")
 public class QueTask {
 

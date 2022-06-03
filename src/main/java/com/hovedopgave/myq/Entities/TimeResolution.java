@@ -3,8 +3,6 @@ package com.hovedopgave.myq.Entities;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "time_resolution", schema = "public")
-//following line is for postgreSql
 @Table(name = "time_resolution", schema = "polygon")
 public class TimeResolution {
 
