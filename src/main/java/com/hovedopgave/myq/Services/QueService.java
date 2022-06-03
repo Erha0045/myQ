@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -100,9 +100,9 @@ public class QueService {
     }
 
     private ZonedDateTime toZonedDateTime(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        return localDate.atStartOfDay(ZoneId.systemDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime localDate = LocalDateTime.parse(date, formatter);
+        return localDate.atZone(ZoneId.systemDefault());
     }
 
     public void deleteQueTask(long id) {

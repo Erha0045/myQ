@@ -11,7 +11,9 @@ import com.hovedopgave.myq.model.QueTaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,15 +41,22 @@ public class IndexController {
         return "index";
     }
 
-    @ResponseBody
-    @GetMapping("/parameterbyid/{id}")
-    public String loadParameterByTimeId(@PathVariable("id") long id) {
-        Gson gson = new Gson();
-        return gson.toJson(parameterService.findByTime(id));
-    }
+//    @ResponseBody
+//    @GetMapping("/parameterbyid/{id}")
+//    public String loadParameterByTimeId(@PathVariable("id") long id) {
+//        Gson gson = new Gson();
+//        return gson.toJson(parameterService.findByTime(id));
+//    }
 
     @PostMapping("/saveQueTask")
-    public String saveQueTask(@ModelAttribute("queTaskRequest") QueTaskRequest queTaskRequest, Model model, HttpServletRequest httpServletRequest) {
+    public String saveQueTask(@ModelAttribute("queTaskRequest") QueTaskRequest queTaskRequest, Model model, HttpServletRequest httpServletRequest, RedirectAttributes redirAttrs) {
+        if (!StringUtils.hasLength(queTaskRequest.getFromDate())
+                && !StringUtils.hasLength(queTaskRequest.getToDate())
+                && StringUtils.hasLength(queTaskRequest.getFullDate())) {
+            String[] split = queTaskRequest.getFullDate().split("-");
+            queTaskRequest.setFromDate(split[0].substring(0, split[0].length() - 1));
+            queTaskRequest.setToDate(split[1].substring(1));
+        }
         List<QueTask> queTaskList = queService.saveQueTask(queTaskRequest, httpServletRequest);
         model.addAttribute("qList", queTaskList);
         return "redirect:/";
