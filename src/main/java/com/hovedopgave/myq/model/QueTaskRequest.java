@@ -6,6 +6,15 @@ public class QueTaskRequest {
     private String toDate;
     private Long parameterId;
     private Long valueType;
+    private String fullDate;
+
+    public String getFullDate() {
+        return fullDate;
+    }
+
+    public void setFullDate(String fullDate) {
+        this.fullDate = fullDate;
+    }
 
     public String getFromDate() {
         return fromDate;
